@@ -22,7 +22,8 @@ COPY . .
 ENV NEXT_TELEMETRY_DISABLED=1
 
 RUN DATABASE_URL="postgresql://postgres:postgres@localhost:5432/devops_build" \
-    npx prisma generate
+    DATABASE_URL_UNPOOLED="postgresql://postgres:postgres@localhost:5432/devops_build" \
+    npx prisma --config=prisma7.config.ts generate
 
 RUN npm run build
 
