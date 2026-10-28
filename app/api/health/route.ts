@@ -1,12 +1,21 @@
 import { NextResponse } from "next/server";
+import { prisma } from "../../../lib/prisma";
 
 export async function GET() {
-  return NextResponse.json(
-    {
+  try {
+    await prisma.$queryRaw`SELECT 1`;
+
+    return NextResponse.json({
       status: "ok",
-      message: "API is healthy",
-      timestamp: new Date().toISOString(),
-    },
-    { status: 200 }
-  );
+      database: "connected",
+    });
+  } catch {
+    return NextResponse.json(
+      {
+        status: "error",
+        database: "unavailable",
+      },
+      { status: 503 }
+    );
+  }
 }
