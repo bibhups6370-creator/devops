@@ -1,4 +1,3 @@
-```yaml
 name: CI/CD - DevOps World
 
 on:
@@ -136,4 +135,3 @@ jobs:
             --project="$PROJECT_ID" \
             --region="$REGION" \
             --format="value(status.url)"
-```
